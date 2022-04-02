@@ -1,0 +1,224 @@
+
+----------------QUESTION NO 1----------------------------
+
+1.Add a column ‘SSN’ at the first position in the table EMPLOYEE
+
+
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+alter table EMPLOYEE add SSN int first;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+--------------QUESTION NO2-------------------
+
+2.Change the data type of the column ‘DOB’  in year the table EMPLOYEE    
+
+
+
+
+
+
+ALTER TABLE EMPLOYEE MODIFY dob year;
+Query OK, 0 rows affected (0.90 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| emp_id   | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+---------------QUESTION NO3---------------------
+
+3.Delete the column ‘emp_id’ the table EMPLOYEE.
+
+
+
+
+ALTER TABLE EMPLOYEE DROP emp_id;
+Query OK, 0 rows affected (0.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+--------------QUESTION NO4--------------------
+
+4.Add  the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE
+
+
+ALTER TABLE PERSON ADD CONSTRAINT C2 UNIQUE(SSN),ADD CONSTRAINT C3 UNIQUE(adhar_no);
+Query OK, 0 rows affected (0.44 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC PERSON;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | UNI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+----------------------------QUESTION NO5----------------------------
+
+
+5.Delete the NULL constraint of ‘age’ in the STUDENT table.
+
+
+
+
+
+ alter table STUDENT MODIFY AGE INT NULL;
+Query OK, 0 rows affected (0.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| AGE     | int(11)     | YES  |     | NULL    |       |
+| address | varchar(15) | YES  |     | NULL    |       |
+| gender  | varchar(5)  | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+--------------------QUESTION NO6--------------------------------
+
+6. Change the table name EMPLOYEE as PERSON
+
+
+
+ ALTER TABLE EMPLOYEE RENAME TO PERSON;
+Query OK, 0 rows affected (0.13 sec)
+
+
+
+DESC PERSON;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | MUL | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | year(4)     | YES  |     | NULL    |       |
+| adhar_no | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+
+
+
+
+
+
+
+
+
+------------------------QUESTION NO7---------------------
+
+7.Delete  the duplicate table.
+
+
+
+
+mysql> ALTER TABLE employee  RENAME TO STUDENT1;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> DESC employee;
+ERROR 1146 (42S02): Table 'scissna.employee' doesn't exist
+mysql> DESC STUDENT1;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| emp_id   | int(11)      | NO   | PRI | NULL    |       |
+| emp_name | int(11)      | YES  |     | NULL    |       |
+| salary   | decimal(5,2) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
