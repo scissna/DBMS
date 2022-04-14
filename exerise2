@@ -190,8 +190,6 @@ DESC PERSON;
 
 
 
-
-
 ------------------------QUESTION NO7---------------------
 
 7.Delete  the duplicate table.
@@ -203,4 +201,4 @@ Query OK, 0 rows affected (0.22 sec)
 
 
 
-
+//VERIFIED
