@@ -66,7 +66,7 @@ mysql> DESC  STUDENT;
 Roll_no – Primary key
 
 
-ALTER TABLE STUDENT ADD CONSTRAINT C1 PRIMARY KEY(roll_no);
+ALTER TABLE STUDENT ADD CONSTRAINT C1 PRIMARY KEY(roll_no);  //USE CREATE COMMAND ONLY
 Query OK, 0 rows affected (0.59 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
@@ -367,3 +367,4 @@ Query OK, 0 rows affected (0.48 sec)
 
 
 
+//EXP1 IS DDL-CREATE COMMAND. SO USE CREATE COMMAND ONLY
