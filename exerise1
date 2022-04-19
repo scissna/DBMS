@@ -37,119 +37,18 @@ mysql> desc EMPLOYEE;
 2.Create a table STUDENT have the
 fields(roll_no, name, age, address, gender)and add following constraints on it.
 
-
-
-CREATE TABLE STUDENT(roll_no INT, name VARCHAR(15), age INT, address VARCHAR(15), gender VARCHAR(5));
-Query OK, 0 rows affected (0.32 sec)
-
-
-
-mysql> DESC  STUDENT;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | YES  |     | NULL    |       |
-| name    | varchar(15) | YES  |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(15) | YES  |     | NULL    |       |
-| gender  | varchar(5)  | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-
-
-
-
-
-
 Roll_no – Primary key
 
-
-ALTER TABLE STUDENT ADD CONSTRAINT C1 PRIMARY KEY(roll_no);  //USE CREATE COMMAND ONLY
-Query OK, 0 rows affected (0.59 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> DESC  STUDENT;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(15) | YES  |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(15) | YES  |     | NULL    |       |
-| gender  | varchar(5)  | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-
-
-
-
+CREATE TABLE STUDENT(roll_no INT primary key, name VARCHAR(15) not null, age INT not null check(0-99), address VARCHAR(15), gender VARCHAR(5) default 'm');
+Query OK, 0 rows affected (0.32 sec)
 
 
 Name – does not allow null values
 
-
-
-ALTER TABLE STUDENT MODIFY name VARCHAR(15) NOT NULL;
-Query OK, 0 rows affected (0.98 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> DESC  STUDENT;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(15) | NO   |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(15) | YES  |     | NULL    |       |
-| gender  | varchar(5)  | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-
-
-
-
-
 Age- must be in between (0-99), does
 not allow null values
 
-
- alter table STUDENT add check(0<=age<100);
-Query OK, 0 rows affected (0.04 sec)
-
-
-mysql> DESC STUDENT;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| roll_no | int(11)     | NO   | PRI | NULL    |       |
-| name    | varchar(15) | NO   |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
-| address | varchar(15) | YES  |     | NULL    |       |
-| gender  | varchar(5)  | YES  |     | m       |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.00 sec)
-
-
-
-
-
-
-
-
-
 Gender- default value is ‘m’
-
-
-
- ALTER TABLE STUDENT ALTER gender SET DEFAULT 'm';
-Query OK, 0 rows affected (0.06 sec)
-Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> DESC  STUDENT;
 +---------+-------------+------+-----+---------+-------+
@@ -157,7 +56,7 @@ mysql> DESC  STUDENT;
 +---------+-------------+------+-----+---------+-------+
 | roll_no | int(11)     | NO   | PRI | NULL    |       |
 | name    | varchar(15) | NO   |     | NULL    |       |
-| age     | int(11)     | YES  |     | NULL    |       |
+| age     | int(11)     | NO   |     | NULL    |       |
 | address | varchar(15) | YES  |     | NULL    |       |
 | gender  | varchar(5)  | YES  |     | m       |       |
 +---------+-------------+------+-----+---------+-------+
@@ -247,25 +146,9 @@ Query OK, 1 row affected (0.00 sec)
 
 mysql> USE INVOICE;
 Database changed
-CREATE TABLE CUST(id INT, name VARCHAR(10), address VARCHAR(15), city VARCHAR(20), ph_no INT);
+CREATE TABLE CUST(id INT primary key, name VARCHAR(10), address VARCHAR(15), city VARCHAR(20), ph_no INT);
 Query OK, 0 rows affected (0.37 sec)
 
-mysql> DESC  CUST;
-+---------+-------------+------+-----+---------+-------+
-| Field   | Type        | Null | Key | Default | Extra |
-+---------+-------------+------+-----+---------+-------+
-| id      | int(11)     | YES  |     | NULL    |       |
-| name    | varchar(10) | YES  |     | NULL    |       |
-| address | varchar(15) | YES  |     | NULL    |       |
-| city    | varchar(20) | YES  |     | NULL    |       |
-| ph_no   | int(11)     | YES  |     | NULL    |       |
-+---------+-------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
-
-
-ALTER TABLE CUST ADD CONSTRAINT C1 PRIMARY KEY(id);
-Query OK, 0 rows affected (0.86 sec)
-Records: 0  Duplicates: 0  Warnings: 0
 
 mysql> DESC CUST;
 +---------+-------------+------+-----+---------+-------+
@@ -303,7 +186,7 @@ mysql> DESC PRODUCT;
 +-------+-------------+------+-----+---------+-------+
 | pid   | int(11)     | NO   | PRI | NULL    |       |
 | pname | varchar(20) | YES  |     | NULL    |       |
-| price | float       | YES  |     | 0       |, inv_date DATE       |
+| price | float       | YES  |     | 0       |       |
 +-------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
 
