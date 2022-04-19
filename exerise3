@@ -206,6 +206,9 @@ mysql> select * from INVOICE_MASTE;
 mysql> INSERT INTO INOVICE_ITEM VALUES(1001,101,5);
 Query OK, 1 row affected (0.05 sec)
 
+mysql> INSERT INTO INOVICE_ITEM VALUES(1002,103,4);
+Query OK, 1 row affected (0.05 sec)
+
 mysql> INSERT INTO INOVICE_ITEM VALUES(1002,101,2);
 Query OK, 1 row affected (0.05 sec)
 
@@ -225,6 +228,7 @@ mysql> SELECT * FROM INOVICE_ITEM;
 | inv_id | pid  | quantity |
 +--------+------+----------+
 |   1001 |  101 |        5 |
+|   1002 |  103 |        4 |
 |   1002 |  101 |        2 |
 |   1003 |  102 |       10 |
 |   1004 |  105 |        1 |
