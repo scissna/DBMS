@@ -38,17 +38,18 @@ mysql> desc EMPLOYEE;
 fields(roll_no, name, age, address, gender)and add following constraints on it.
 
 Roll_no – Primary key
-
-CREATE TABLE STUDENT(roll_no INT primary key, name VARCHAR(15) not null, age INT not null check(0-99), address VARCHAR(15), gender VARCHAR(5) default 'm');
-Query OK, 0 rows affected (0.32 sec)
-
-
 Name – does not allow null values
 
 Age- must be in between (0-99), does
 not allow null values
 
 Gender- default value is ‘m’
+
+CREATE TABLE STUDENT(roll_no INT primary key, name VARCHAR(15) not null, age INT not null check(0-99), address VARCHAR(15), gender VARCHAR(5) default 'm');
+Query OK, 0 rows affected (0.32 sec)
+
+
+
 
 mysql> DESC  STUDENT;
 +---------+-------------+------+-----+---------+-------+
