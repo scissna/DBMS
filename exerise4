@@ -1,0 +1,204 @@
+Exp4 
+ 
+DML COMMAND- UPDATE
+1. Update the price of a particular product.
+2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table.
+3. Update all prices with 2% of its original price.
+4. Change the address, city, phone number of a particular customer.
+5. Change the quantity of a purchased product of inv_id ‘101’
+
+
+
+----------------QUESTION 1----------------------------
+
+mysql> UPDATE PRODUCT SET price=60 WHERE pname='BOOK';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+--------previous table---------
+
+mysql> SELECT *FROM PRODUCT;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 101 | PEN    |   100 |
+| 102 | BOOK   |   120 |
+| 103 | BOX    |    30 |
+| 104 | PENCIL |    60 |
+| 105 | SCALE  |    50 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+----new table-----------
+
+mysql> SELECT * FROM PRODUCT;
++-----+--------+-------+
+| pid | pname  | price |
++-----+--------+-------+
+| 101 | PEN    |   100 |
+| 102 | BOOK   |    60 |
+| 103 | BOX    |    30 |
+| 104 | PENCIL |    60 |
+| 105 | SCALE  |    50 |
++-----+--------+-------+
+5 rows in set (0.00 sec)
+
+
+----------------QUESTION 2----------------------------
+
+mysql> UPDATE CUST SET city='kozhikode' WHERE id=4;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM CUST;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456751 |
+|  2 | SCISSMO | THEKKEPURATH  | KKM       | 907456750 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456752 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907451750 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 607451750 |
+|  6 | VARUN   | KALLAYIL      | EKM       |           |
++----+---------+---------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+
+
+----------------QUESTION 3----------------------------
+
+mysql> UPDATE PRODUCT SET price=price+(price*(2/100));
+Query OK, 5 rows affected (0.06 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select *from PRODUCT;
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 100.00 |
+| 102 | BOOK   |  60.00 |
+| 103 | BOX    |  30.00 |
+| 104 | PENCIL |  60.00 |
+| 105 | SCALE  |  50.00 |
++-----+--------+--------+
+5 rows in set (0.00 sec)
+
+
+
+
+-------------new table--------------------
+
+
+
+
+mysql> select *from PRODUCT;
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 102.00 |
+| 102 | BOOK   |  61.20 |
+| 103 | BOX    |  30.60 |
+| 104 | PENCIL |  61.20 |
+| 105 | SCALE  |  51.00 |
++-----+--------+--------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+----------------QUESTION 4----------------------------
+
+mysql> UPDATE CUST SET address="KOTTARAPATT",city="MLP",ph_no="90745622" WHERE id=2;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+
+
+mysql> SELECT *FROM CUST;
++----+---------+---------------+---------+-----------+
+| id | name    | address       | city    | ph_no     |
++----+---------+---------------+---------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM     | 907456751 |
+|  2 | SCISSMO | THEKKEPURATH  | KKM     | 907456750 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR     | 907456752 |
+|  4 | SARANYA | KANNOTH       | CALICUT | 907451750 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD     | 607451750 |
+|  6 | VARUN   | KALLAYIL      | EKM     |           |
++----+---------+---------------+---------+-----------+
+6 rows in set (0.00 sec)
+
+
+
+
+--------------new table-----------------------
+
+
+
+
+
+mysql> SELECT * FROM CUST;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456751 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 90745622  |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456752 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907451750 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 607451750 |
+|  6 | VARUN   | KALLAYIL      | EKM       |           |
++----+---------+---------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+----------------QUESTION 5----------------------------
+
+mysql> UPDATE INOVICE_ITEM SET quantity=1 where inv_id=3;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+mysql> SELECT * FROM INOVICE_ITEM;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1    |  101 |        5 |
+|   2    |  101 |        2 |
+|   2    |  103 |        4 |
+|   3    |  102 |       10 |
+|   5    |  105 |        9 |
+|   5    |  104 |        8 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+
+--------NEW TABLE---------------
+
+
+
+mysql> SELECT * FROM INOVICE_ITEM;;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1    |  101 |        5 |
+|   2    |  101 |        2 |
+|   2    |  103 |        4 |
+|   3    |  102 |        1 |
+|   5    |  105 |        9 |
+|   5    |  104 |        8 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+
+
