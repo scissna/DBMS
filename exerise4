@@ -1,6 +1,6 @@
-Exp4 
- 
-DML COMMAND- UPDATE
+                      Exp4 
+           DML COMMAND- UPDATE
+          ------------------------------------
 1. Update the price of a particular product.
 2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table.
 3. Update all prices with 2% of its original price.
@@ -47,7 +47,7 @@ mysql> SELECT * FROM PRODUCT;
 
 ----------------QUESTION 2----------------------------
 
-mysql> UPDATE CUST SET city='kozhikode' WHERE id=4;
+mysql> UPDATE CUST SET city='kozhikode' WHERE id=4;  //WRONG
 Query OK, 1 row affected (0.04 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -163,7 +163,7 @@ mysql> SELECT * FROM CUST;
 
 ----------------QUESTION 5----------------------------
 
-mysql> UPDATE INOVICE_ITEM SET quantity=1 where inv_id=3;
+mysql> UPDATE INOVICE_ITEM SET quantity=1 where inv_id=3;  PRODUCT ID NEEDED IN CONDITION
 Query OK, 1 row affected (0.08 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -201,4 +201,4 @@ mysql> SELECT * FROM INOVICE_ITEM;;
 5 rows in set (0.00 sec)
 
 
-
+//CORRECT THE QUERIES
