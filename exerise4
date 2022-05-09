@@ -113,7 +113,7 @@ mysql> select *from PRODUCT;
 
 ----------------QUESTION 4----------------------------
 
-mysql> UPDATE CUST SET address="KOTTARAPATT",city="MLP",ph_no="90745622" WHERE id=2;
+mysql> UPDATE CUST SET address="KOTTARAPATT",city="MLP",ph_no="90745622" WHERE id=2; //MENTION CUSTOMER NAME
 Query OK, 1 row affected (0.08 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -200,5 +200,5 @@ mysql> SELECT * FROM INOVICE_ITEM;;
 +--------+------+----------+
 5 rows in set (0.00 sec)
 
-
+//VERIFIED
 
