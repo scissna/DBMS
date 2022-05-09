@@ -13,7 +13,7 @@ Exp5 :
 
 --------question 1---------------------------------
 
-mysql> SELECT *FROM CUST;
+mysql> SELECT *FROM CUST; //WRONG
 +-------+---------+---------------+-----------+-----------+
 | id    | name    | address       | city      | ph_no     |
 +-------+---------+---------------+-----------+-----------+
@@ -75,7 +75,7 @@ mysql> select *from INOVICE_ITEM;
 +--------+------+----------+
 4 rows in set (0.00 sec)
 
-mysql>DELETE FROM INOVICE_ITEM WHERE inv_id=1001;
+mysql>DELETE FROM INOVICE_ITEM WHERE inv_id=1001; //WRONG
 mysql> select *from INOVICE_ITEM;
 +--------+------+----------+
 | inv_id | pid  | quantity |
@@ -195,3 +195,4 @@ mysql> SELECT * FROM INOVICE_ITEM;
 
 
 
+//CORRECTION
