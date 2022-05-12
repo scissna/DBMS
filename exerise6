@@ -1,0 +1,299 @@
+1. List all customer details.
+2.List pname, price of all products.
+3.List all invoice items, avoid duplicates.
+4.List product price between 50rs and 150rs
+5.List the customer details who lives in ‘ekm’,’tvm’.
+6.List the invoice details from 1st January 2021 to 31st march 2022
+7.List the customer details who not live in ‘tvm’.
+8.List the customers who have no phone number.
+9.Display customer names in descending order.
+10.Display the customer details sorted in ascending by city and descending by names.
+11.Find the customer names start with ‘A’.
+12.Find the customer names who have ‘e’ or ‘a’ in them.
+13.Find the customer names who have at least 3 characters.
+14.Listthe names of customers their names have ‘r’ in second position.
+15. Find the customer names start with ‘a’ and are at least 3 characters in length.
+
+
+
+
+
+
+
+---------------question 1-------------------------
+
+mysql> select * from CUST;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
++----+---------+---------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+
+------------------QUESTION 2-------------------------------
+mysql> SELECT pname,price from PRODUCT;
++--------+--------+
+| pname  | price  |
++--------+--------+
+| PEN    | 102.00 |
+| BOOK   |  61.20 |
+| BOX    |  30.60 |
+| PENCIL |  61.20 |
+| SCALE  |  51.00 |
++--------+--------+
+5 rows in set (0.00 sec)
+
+
+--------------question 3--------------------------------
+
+mysql> SELECT DISTINCT inv_id from INVOICE_ITEM;
++--------+
+| inv_id |
++--------+
+|   1003 |
+|   1001 |
+|   1002 |
++--------+
+3 rows in set (0.00 sec)
+
+
+
+-----------QUESTION 4-----------------------------------
+mysql> SELECT * FROM PRODUCT;
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 102.00 |
+| 102 | BOOK   |  61.20 |
+| 103 | BOX    |  30.60 |
+| 104 | PENCIL |  61.20 |
+| 105 | SCALE  |  51.00 |
++-----+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *FROM PRODUCT WHERE PRICE BETWEEN 50 AND 150;
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 102.00 |
+| 102 | BOOK   |  61.20 |
+| 104 | PENCIL |  61.20 |
+| 105 | SCALE  |  51.00 |
++-----+--------+--------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+---------------QUESTION5-----------------------
+
+mysql> SELECT * FROM CUST;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
++----+---------+---------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUST WHERE city in('TVM','EKM');
++----+--------+--------------+------+-----------+
+| id | name   | address      | city | ph_no     |
++----+--------+--------------+------+-----------+
+|  1 | SRUTHI | THEKKEPURATH | TVM  | 907456752 |
+|  6 | VARUN  | KALLAYIL     | EKM  | 907456457 |
++----+--------+--------------+------+-----------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+----------------QUESTION 6-----------------------------------------------
+
+mysql> SELECT *FROM INVOICE_MASTE;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1001 |       1 | 2022-01-01 |
+|   1002 |       2 | 2022-01-31 |
+|   1003 |       3 | 2022-03-31 |
+|   1004 |       4 | 2022-02-28 |
+|   1005 |       5 | 2022-05-02 |
+|   1008 |       1 | 2021-01-01 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
+
+
+mysql> SELECT *FROM INVOICE_MASTE WHERE inv_date BETWEEN '2021-01-01' AND '2022-03-31';
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1001 |       1 | 2022-01-01 |
+|   1002 |       2 | 2022-01-31 |
+|   1003 |       3 | 2022-03-31 |
+|   1004 |       4 | 2022-02-28 |
+|   1008 |       1 | 2021-01-01 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+
+
+---------------------QUESTION 7-----------------------------------------------------------------
+
+mysql> select *from CUST WHERE city not in('TVM');
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
++----+---------+---------------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+---------------------------------QUESTION 8-----------------------------------------------------------
+
+mysql> select *from CUST WHERE  ph_no is NULL;
++----+-------+-----------+------+-------+
+| id | name  | address   | city | ph_no |
++----+-------+-----------+------+-------+
+|  7 | BHANU | POKOTAYIL | PTM  |  NULL |
++----+-------+-----------+------+-------+
+1 row in set (0.00 sec)
+
+
+-----------------------------------QUESTION 9-----------------------------------------------------------
+mysql> SELECT name FROM CUST ORDER BY name  DESC;
++---------+
+| name    |
++---------+
+| VARUN   |
+| SRUTHI  |
+| SCISSMO |
+| SARANYA |
+| HASNA   |
+| BHANU   |
+| AMRUTHA |
++---------+
+7 rows in set (0.00 sec)
+
+
+-----------------------------question 10----------------------------------------------------------------------
+
+mysql> SELECT *FROM CUST ORDER BY city,name DESC;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  7 | BHANU   | POKOTAYIL     | PTM       |      NULL |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
++----+---------+---------------+-----------+-----------+
+7 rows in set (0.00 sec)
+
+
+---------------------------------question 11---------------------------------------------------------------
+
+mysql> SELECT *FROM CUST WHERE name LIKE 'A%';
++----+---------+---------------+------+-----------+
+| id | name    | address       | city | ph_no     |
++----+---------+---------------+------+-----------+
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR  | 907456743 |
++----+---------+---------------+------+-----------+
+1 row in set (0.00 sec)
+
+
+-----------------------question 12---------------------------------------------------------------------------
+
+mysql> SELECT name FROM CUST WHERE name LIKE '%A%' or name LIKE '%E%';
++---------+
+| name    |
++---------+
+| AMRUTHA |
+| SARANYA |
+| HASNA   |
+| VARUN   |
+| BHANU   |
++---------+
+5 rows in set (0.00 sec)
+
+
+
+------------------------------question 13-----------------------------------------------------------------------
+
+mysql> SELECT *FROM CUST;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
+|  7 | BHANU   | POKOTAYIL     | PTM       |      NULL |
+|  8 | AJU     | THEOOPARAM    | KKM       | 904563214 |
++----+---------+---------------+-----------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT name FROM CUST WHERE LENGTH(name)!=3;
++---------+
+| name    |
++---------+
+| SRUTHI  |
+| SCISSMO |
+| AMRUTHA |
+| SARANYA |
+| HASNA   |
+| VARUN   |
+| BHANU   |
++---------+
+7 rows in set (0.00 sec)
+
+
+
+------------------------QUESTION 14-----------------------------------------------------------------------------------
+
+mysql> SELECT name FROM CUST WHERE name LIKE '_R%';
++--------+
+| name   |
++--------+
+| SRUTHI |
++--------+
+1 row in set (0.00 sec)
+
+
+
+-------------------------------QUESTION 15--------------------------------------------------------------------------
+
+mysql> SELECT name FROM CUST where name like 'A__%';
++---------+
+| name    |
++---------+
+| AMRUTHA |
+| AJU     |
++---------+
+2 rows in set (0.00 sec)
+
+
+

@@ -1,0 +1,88 @@
+DML- SELECT QUERY 2 (GROUP BY, AGGREGATE FUNCTIONS)
+1. List product name, price except soap on price order.
+2. Find minimum, maximum and average price of products.
+3. Find number of customers in each city.
+4. Find number of customers in each city, only include city with more than 3 customers.
+5. Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’.
+
+
+
+
+----------------------------------------question 1----------------------------------------------------
+
+
+mysql> SELECT pname,price FROM PRODUCT WHERE pname!='SOAP' ORDER BY price;
++--------+--------+
+| pname  | price  |
++--------+--------+
+| BOX    |  30.60 |
+| SCALE  |  51.00 |
+| BOOK   |  61.20 |
+| PENCIL |  61.20 |
+| PEN    | 102.00 |
++--------+--------+
+5 rows in set (0.00 sec)
+
+
+--------------------------------------question 2------------------------------------------------------
+
+
+mysql> select min(price) as min_price,max(price) as max_price,avg(price) as avg_price from PRODUCT;
++-----------+-----------+-----------+
+| min_price | max_price | avg_price |
++-----------+-----------+-----------+
+|     12.00 |    102.00 | 53.000000 |
++-----------+-----------+-----------+
+1 row in set (0.00 sec)
+
+
+-----------------------------------question 3------------------------------------------------------------
+
+mysql> SELECT city,count(id) from CUST GROUP BY city;
++-----------+-----------+
+| city      | count(id) |
++-----------+-----------+
+| EKM       |         1 |
+| KKM       |         1 |
+| kozhikode |         1 |
+| MLP       |         1 |
+| PKD       |         1 |
+| PTM       |         1 |
+| TSR       |         1 |
+| TVM       |         1 |
++-----------+-----------+
+8 rows in set (0.00 sec)
+
+
+-------------------------------question 4-------------------------------------------------------------------
+
+mysql> SELECT city,count(id) from CUST GROUP BY city having count(id)>3;
++------+-----------+
+| city | count(id) |
++------+-----------+
+| TSR  |         4 |
++------+-----------+
+1 row in set (0.01 sec)
+
+
+----------------------------QUESTION 5-----------------------------------------------------------------------
+mysql> SELECT CONCAT(name, '   lives in   ',city) AS CUSTOMER_DETAILS FROM CUST;
++--------------------------------+
+| CUSTOMER_DETAILS               |
++--------------------------------+
+| SRUTHI   lives in   TVM        |
+| SCISSMO   lives in   MLP       |
+| AMRUTHA   lives in   TSR       |
+| SARANYA   lives in   kozhikode |
+| HASNA   lives in   PKD         |
+| VARUN   lives in   EKM         |
+| BHANU   lives in   PTM         |
+| AJU   lives in   KKM           |
+| SHALU   lives in   TSR         |
+| SHALI   lives in   TSR         |
+| SARATH   lives in   TSR        |
++--------------------------------+
+11 rows in set (0.00 sec)
+
+
+
