@@ -1,0 +1,66 @@
+10 VIEWS
+
+
+1.      
+Create
+a view for customers who have purchased products.
+
+
+2.      
+Create
+a view for invoice products[cname, , inv_id, product_id, quantity]
+
+
+
+
+
+
+
+----------------------------------1-----------------------------------------------------------------
+
+
+mysql> CREATE VIEW   PURCHASED_PRDT AS  SELECT CUST.* FROM CUST INNER JOIN INVOICE_MASTE on CUST.id=INVOICE_MASTE.cust_id;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select *from PURCHASED_PRDT;
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
++----+---------+---------------+-----------+-----------+
+6 rows in set (0.00 sec)
+
+
+
+
+
+
+-------------------------------2----------------------------------------
+
+
+
+
+
+mysql> CREATE VIEW INVOICE_PRDT AS  SELECT  CUST.name,INVOICE_MASTE.inv_id,PRODUCT.pid,INOVICE_ITEM.quantity FROM CUST INNER JOIN INVOICE_MASTE ON CUST.id=INVOICE_MASTE.cust_id INNER JOIN INOVICE_ITEM ON INVOICE_MASTE.inv_id=INOVICE_ITEM.inv_id INNER JOIN PRODUCT ON PRODUCT.pid=INOVICE_ITEM.pid ;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select *from INVOICE_PRDT;
++---------+--------+-----+----------+
+| name    | inv_id | pid | quantity |
++---------+--------+-----+----------+
+| SCISSMO |   1002 | 101 |        2 |
+| SRUTHI  |   1001 | 101 |        5 |
+| SRUTHI  |   1001 | 101 |        5 |
+| SCISSMO |   1002 | 101 |        2 |
+| SCISSMO |   1002 | 103 |        4 |
++---------+--------+-----+----------+
+5 rows in set (0.00 sec)
+
+
+
+
