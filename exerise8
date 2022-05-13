@@ -1,0 +1,114 @@
+SUBQUERY
+1. List the customer names of invoice date 3rd February 2018.
+2. List the product name and price of each invoice item.
+3. List the product names, only include their purchased quantity more than 3.
+4. Find the product that has no sale.
+5. List the customer names who purchased the items ‘pen’ and ‘pencil’.
+6. Display the purchased product details of the customer ’xyz’.
+7. List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+
+
+------------------------QUESTION 1------------------------------------------------
+
+mysql> select name from CUST where id=(select cust_id from INVOICE_MASTE WHERE inv_date='2022-02-28');
++---------+
+| name    |
++---------+
+| SARANYA |
++---------+
+1 row in set (0.00 sec)
+
+
+
+------------------------QUESTION 2--------------------------------------------------
+
+mysql> select pname,price from PRODUCT where pid IN (select pid from INOVICE_ITEM);
++-------+--------+
+| pname | price  |
++-------+--------+
+| PEN   | 102.00 |
+| BOX   |  30.60 |
++-------+--------+
+2 rows in set (0.02 sec)
+
+
+------------------------QUESTION 3-----------------------------------------------
+
+
+mysql> SELECT pname FROM PRODUCT WHERE pid IN(SELECT pid FROM INOVICE_ITEM WHERE quantity > 3);
++-------+
+| pname |
++-------+
+| PEN   |
+| BOX   |
++-------+
+2 rows in set (0.03 sec)
+
+
+-----------------------question 4--------------------------------------------------
+
+
+
+mysql> SELECT pname FROM PRODUCT WHERE pid NOT IN(SELECT pid FROM INOVICE_ITEM);
+
++--------+
+| pname  |
++--------+
+| BOOK   |
+| PENCIL |
+| SCALE  |
+| SOAP   |
++--------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+----------------------------QUESTION 5-------------------------------------------------------------
+
+
+SELECT name FROM CUST WHERE id IN(SELECT cust_id FROM INVOICE_MASTE WHERE inv_id IN(SELECT inv_id FROM INOVICE_ITEM WHERE pid IN(SELECT pid FROM PRODUCT WHERE pname="PEN" OR pname="SOAP")));
++---------+
+| name    |
++---------+
+| SCISSMO |
+| SRUTHI  |
++---------+
+2 rows in set (0.01 sec)
+
+
+-----------------------------QUESTION 6------------------------------------------
+
+
+mysql> SELECT pname,price FROM PRODUCT WHERE pid IN(SELECT pid FROM INOVICE_ITEM WHERE inv_id IN(SELECT inv_id FROM INVOICE_MASTE WHERE cust_id
+IN(SELECT id FROM CUST WHERE name="SRUTHI")));
++-------+--------+
+| pname | price  |
++-------+--------+
+| PEN   | 102.00 |
++-------+--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+---------------------------QUESTION 7--------------------------------------------------------
+
+mysql> SELECT name FROM CUST WHERE id IN(SELECT cust_id FROM INVOICE_MASTE WHERE inv_id IN(SELECT inv_id from INOVICE_ITEM GROUP BY inv_id HAVING COUNT(inv_id)>=2));
+
++---------+
+| name    |
++---------+
+| SRUTHI  |
+| SCISSMO |
++---------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+

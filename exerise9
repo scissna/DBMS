@@ -1,0 +1,112 @@
+JOINS
+
+
+1.      
+List
+the product name and quantity of invoice items.
+
+
+2.      
+Display
+invoice details of the transaction dated ’31-01-2022’.
+
+
+3.      
+Display
+the customer name, product name, invoice date of purchased item ‘pen’.
+
+
+4.      
+Display
+all customer details and invoice details must include customer has not
+purchased items.
+
+
+
+
+
+
+---------------------------QUESTON 1----------------------------------------------------------------------------
+
+mysql> SELECT PRODUCT.pname,INOVICE_ITEM.quantity FROM PRODUCT INNER JOIN INOVICE_ITEM ON PRODUCT.pid = INOVICE_ITEM.pid;
++-------+----------+
+| pname | quantity |
++-------+----------+
+| PEN   |        2 |
+| PEN   |        5 |
+| PEN   |        5 |
+| PEN   |        2 |
+| BOX   |        4 |
++-------+----------+
+5 rows in set (0.00 sec)
+
+
+
+
+-------------------------------------------QUESTION2------------------------------------------------------------------------
+
+mysql> SELECT CUST.name,PRODUCT.pname,PRODUCT.price,INVOICE_MASTE.inv_id,INVOICE_MASTE.inv_date,INOVICE_ITEM.quantity FROM CUST INNER JOIN INVOICE_MASTE  ON CUST.id=INVOICE_MASTE.cust_id INNER JOIN INOVICE_ITEM ON INVOICE_MASTE.inv_id=INOVICE_ITEM.inv_id INNER JOIN PRODUCT ON PRODUCT.pid=INOVICE_ITEM.pid WHERE inv_date='2022-01-31';
+
+
++---------+-------+--------+--------+------------+----------+
+| name    | pname | price  | inv_id | inv_date   | quantity |
++---------+-------+--------+--------+------------+----------+
+| SCISSMO | PEN   | 102.00 |   1002 | 2022-01-31 |        2 |
+| SCISSMO | PEN   | 102.00 |   1002 | 2022-01-31 |        2 |
+| SCISSMO | BOX   |  30.60 |   1002 | 2022-01-31 |        4 |
++---------+-------+--------+--------+------------+----------+
+3 rows in set (0.00 sec)
+
+
+
+
+----------------------------------QUESTION 3--------------------------------------------------------------------------------------
+
+
+
+mysql> SELECT CUST.name,PRODUCT.pname,INVOICE_MASTE.inv_date FROM CUST INNER JOIN INVOICE_MASTE  ON CUST.id=INVOICE_MASTE.cust_id INNER JOIN INOVICE_ITEM ON INVOICE_MASTE.inv_id=INOVICE_ITEM.inv_id INNER JOIN PRODUCT ON PRODUCT.pid=INOVICE_ITEM.pid WHERE pname='PEN';
+
++---------+-------+------------+
+| name    | pname | inv_date   |
++---------+-------+------------+
+| SCISSMO | PEN   | 2022-01-31 |
+| SRUTHI  | PEN   | 2022-01-01 |
+| SRUTHI  | PEN   | 2022-01-01 |
+| SCISSMO | PEN   | 2022-01-31 |
++---------+-------+------------+
+4 rows in set (0.00 sec)
+
+
+
+------------------------------------QUESTION 4---------------------------------------------------------------
+
+
+
+
+
+mysql> SELECT CUST.name,PRODUCT.pname,INVOICE_MASTE.inv_id,INVOICE_MASTE.inv_date,INOVICE_ITEM.quantity FROM CUST LEFT  JOIN INVOICE_MASTE  ON CUST.id=INVOICE_MASTE.cust_id LEFT  JOIN INOVICE_ITEM ON INVOICE_MASTE.inv_id=INOVICE_ITEM.inv_id LEFT  JOIN PRODUCT ON PRODUCT.pid=INOVICE_ITEM.pid;
++---------+-------+--------+------------+----------+
+| name    | pname | inv_id | inv_date   | quantity |
++---------+-------+--------+------------+----------+
+| SCISSMO | PEN   |   1002 | 2022-01-31 |        2 |
+| SRUTHI  | PEN   |   1001 | 2022-01-01 |        5 |
+| SRUTHI  | PEN   |   1001 | 2022-01-01 |        5 |
+| SCISSMO | PEN   |   1002 | 2022-01-31 |        2 |
+| SCISSMO | BOX   |   1002 | 2022-01-31 |        4 |
+| AMRUTHA | NULL  |   1003 | 2022-03-31 |     NULL |
+| SARANYA | NULL  |   1004 | 2022-02-28 |     NULL |
+| HASNA   | NULL  |   1005 | 2022-05-02 |     NULL |
+| SRUTHI  | NULL  |   1008 | 2021-01-01 |     NULL |
+| VARUN   | NULL  |   NULL | NULL       |     NULL |
+| BHANU   | NULL  |   NULL | NULL       |     NULL |
+| AJU     | NULL  |   NULL | NULL       |     NULL |
+| SHALU   | NULL  |   NULL | NULL       |     NULL |
+| SHALI   | NULL  |   NULL | NULL       |     NULL |
+| SARATH  | NULL  |   NULL | NULL       |     NULL |
++---------+-------+--------+------------+----------+
+15 rows in set (0.00 sec)
+
+
+
+
+
