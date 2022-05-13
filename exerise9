@@ -108,5 +108,5 @@ mysql> SELECT CUST.name,PRODUCT.pname,INVOICE_MASTE.inv_id,INVOICE_MASTE.inv_dat
 
 
 
-
+//VERIFIED
 
