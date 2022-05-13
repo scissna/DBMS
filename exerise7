@@ -1,3 +1,6 @@
+EX: NO???????????????????/
+
+
 DML- SELECT QUERY 2 (GROUP BY, AGGREGATE FUNCTIONS)
 1. List product name, price except soap on price order.
 2. Find minimum, maximum and average price of products.
@@ -86,3 +89,4 @@ mysql> SELECT CONCAT(name, '   lives in   ',city) AS CUSTOMER_DETAILS FROM CUST;
 
 
 
+//VERIFIED
