@@ -71,3 +71,4 @@ mysql> select pname from PRODUCT WHERE pid IN(SELECT pid from INOVICE_ITEM WHERE
 
 
 
+//VERIFIED
