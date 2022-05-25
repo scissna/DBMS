@@ -1,0 +1,72 @@
+12. DCL COMMAND
+Create two users user1, user2
+
+
+mysql> create user userone@localhost identified by 'user1';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> create user usertwo@localhost identified by 'user2';
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+1. GRANT
+Give insert and select privilege to user 1 on customer table in the invoice database.
+
+
+
+mysql> show grants for  userone@localhost;
++---------------------------------------------+
+| Grants for userone@localhost                |
++---------------------------------------------+
+| GRANT USAGE ON *.* TO 'userone'@'localhost' |
++---------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>  grant insert,select on CUST to userone@localhost;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for  userone@localhost;
++-------------------------------------------------------------------+
+| Grants for userone@localhost                                      |
++-------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'userone'@'localhost'                       |
+| GRANT SELECT, INSERT ON `INVOICE`.`CUST` TO 'userone'@'localhost' |
++-------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Give update and delete privilege to user 2 on all tables in the invoice database.
+
+
+
+
+mysql>  grant update,delete on * to usertwo@localhost;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for  usertwo@localhost;
++--------------------------------------------------------------+
+| Grants for usertwo@localhost                                 |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'usertwo'@'localhost'                  |
+| GRANT UPDATE, DELETE ON `INVOICE`.* TO 'usertwo'@'localhost' |
++--------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+2. REVOKE
+Remove delete privilege of user 2
+
+mysql> revoke delete on *.* from usertwo@localhost;
+Query OK, 0 rows affected (0.00 sec)
+
+
