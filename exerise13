@@ -1,0 +1,74 @@
+13. TCL COMMANDS
+1. Commit
+2. Rollback
+3. Savepoint
+
+
+
+
+
+mysql> CREATE TABLE TEACH(ROLL INT,ID INT);
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> SET AUTOCOMMIT=OFF;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO TEACH VALUES(1,101);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SELECT *FROM TEACH;
++------+------+
+| ROLL | ID   |
++------+------+
+|    1 |  101 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> SAVEPOINT A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO TEACH VALUES(11,102);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO TEACH VALUES(12,103);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT *FROM TEACH;
++------+------+
+| ROLL | ID   |
++------+------+
+|    1 |  101 |
+|   11 |  102 |
+|   12 |  103 |
++------+------+
+3 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT *FROM TEACH;
++------+------+
+| ROLL | ID   |
++------+------+
+|    1 |  101 |
+|   11 |  102 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SELECT *FROM TEACH;
++------+------+
+| ROLL | ID   |
++------+------+
+|    1 |  101 |
++------+------+
+1 row in set (0.00 sec)
+
