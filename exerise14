@@ -1,0 +1,139 @@
+exp:14 PL/SQL PROGRAMS- STORED PROCEDURES
+
+
+1.Create a procedure to display all tables in the invoice database.
+
+mysql> delimiter //
+mysql> create procedure INVOICE_tables()
+    -> begin
+    -> select * from PRODUCT;
+    -> select * from INOVICE_ITEM;
+    -> select * from INVOICE_MASTE;
+    -> select * from CUST;
+    -> end//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call INVOICE_tables();
+    -> //
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 102.00 |
+| 102 | BOOK   |  61.20 |
+| 103 | BOX    |  30.60 |
+| 104 | PENCIL |  61.20 |
+| 105 | SCALE  |  51.00 |
+| 106 | SOAP   |  12.00 |
++-----+--------+--------+
+6 rows in set (0.00 sec)
+
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|   1002 |  101 |        2 |
+|   1001 |  101 |        5 |
+|   1001 |  101 |        5 |
+|   1002 |  101 |        2 |
+|   1002 |  103 |        4 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|   1001 |       1 | 2022-01-01 |
+|   1002 |       2 | 2022-01-31 |
+|   1003 |       3 | 2022-03-31 |
+|   1004 |       4 | 2022-02-28 |
+|   1005 |       5 | 2022-05-02 |
+|   1008 |       1 | 2021-01-01 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
+|  7 | BHANU   | POKOTAYIL     | PTM       |      NULL |
+|  8 | AJU     | THEOOPARAM    | KKM       | 904563214 |
+|  9 | SHALU   | HHJYEJ        | TSR       | 808633124 |
+| 10 | SHALI   | HWEESEJ       | TSR       | 808637124 |
+| 11 | SARATH  | SWEESEJ       | TSR       | 608637124 |
++----+---------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+2.Create a procedure to find greatest of 3 numbers.
+
+
+mysql> delimiter //
+mysql> create procedure greatest (a int,b int,c int)
+    -> begin
+    -> if(a>b) and(a>c) then
+    -> select a as 'Greatest';
+    -> elseif(b>a) and (b>c) then
+    -> select b as 'Greatest';
+    -> else
+    -> select c as 'Greatest';
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> call greatest(7,5,9) //
++----------+
+| Greatest |
++----------+
+|        9 |
++----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+3.Create a procedure to display invoice details of a particular customer.
+
+
+mysql> delimiter //
+mysql> create procedure inv_detail(a varchar(10))
+    -> begin
+    -> select inv_id,inv_date,price,quantity from CUST
+    -> natural join INVOICE_MASTE
+    -> natural join INOVICE_ITEM
+    -> natural join PRODUCT
+    -> WHERE name=a;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call inv_details('SARANYA') //
++--------+------------+--------+----------+
+| inv_id | inv_date   | price  | quantity |
++--------+------------+--------+----------+
+|   1002 | 2022-01-31 | 102.00 |        2 |
+|   1001 | 2022-01-01 | 102.00 |        5 |
+|   1001 | 2022-01-01 | 102.00 |        5 |
+|   1002 | 2022-01-31 | 102.00 |        2 |
+|   1002 | 2022-01-31 |  30.60 |        4 |
++--------+------------+--------+----------+
+5 rows in set (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+
