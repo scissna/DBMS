@@ -1,0 +1,131 @@
+16  PL/SQL PROGRAMS – TRIGGERS
+
+
+1.Create a trigger to handle updates to the customer table.
+
+
+
+mysql> create table customer_1(id int, name varchar(15),address varchar(15),city varchar(25),phno bigint);
+    -> //
+Query OK, 0 rows affected (0.35 sec)
+
+
+mysql> delimiter //
+mysql> 
+mysql> create trigger updaterS
+    -> before update
+    -> on CUST for each row
+    -> begin
+    -> insert into customer_1
+    -> values(old.id,old.name,old.address,old.city,old.ph_no);
+    -> end //
+Query OK, 0 rows affected (0.14 sec)
+
+
+mysql> SELECT * FROM CUST;
+    -> //
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
+|  7 | BHANU   | POKOTAYIL     | PTM       |      NULL |
+|  8 | AJU     | THEOOPARAM    | KKM       | 904563214 |
+|  9 | SHALU   | HHJYEJ        | TSR       | 808633124 |
+| 10 | SHALI   | HWEESEJ       | TSR       | 808637124 |
+| 11 | SARATH  | SWEESEJ       | TSR       | 608637124 |
++----+---------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+
+
+
+mysql> UPDATE CUST SET  city='PKD' WHERE id=9;
+    -> //
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM customer_1;
+    -> //
++------+-------+---------+------+-----------+
+| id   | name  | address | city | phno      |
++------+-------+---------+------+-----------+
+|    9 | SHALU | HHJYEJ  | TSR  | 808633124 |
+|    9 | SHALU | HHJYEJ  | TSR  | 808633124 |
++------+-------+---------+------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUST;
+    -> //
++----+---------+---------------+-----------+-----------+
+| id | name    | address       | city      | ph_no     |
++----+---------+---------------+-----------+-----------+
+|  1 | SRUTHI  | THEKKEPURATH  | TVM       | 907456752 |
+|  2 | SCISSMO | KOTTARAPATT   | MLP       | 907456753 |
+|  3 | AMRUTHA | MADHUCHIRAYIL | TSR       | 907456743 |
+|  4 | SARANYA | KANNOTH       | kozhikode | 907456744 |
+|  5 | HASNA   | ETTAMTHARAYIL | PKD       | 907456745 |
+|  6 | VARUN   | KALLAYIL      | EKM       | 907456457 |
+|  7 | BHANU   | POKOTAYIL     | PTM       |      NULL |
+|  8 | AJU     | THEOOPARAM    | KKM       | 904563214 |
+|  9 | SHALU   | HHJYEJ        | PKD       | 808633124 |
+| 10 | SHALI   | HWEESEJ       | TSR       | 808637124 |
+| 11 | SARATH  | SWEESEJ       | TSR       | 608637124 |
++----+---------+---------------+-----------+-----------+
+11 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+2.Create a trigger to handle inserts to the product relation ( if price < 5 the setprice to 10).
+
+mysql> delimiter //
+mysql> 
+mysql> 
+mysql> create trigger product_price
+    ->      before insert
+    ->      on PRODUCT
+    ->      for each row
+    ->      begin
+    ->      if new.price < 5 then
+    ->      set new.price=10;
+    ->      end if;
+    ->      end //
+Query OK, 0 rows affected (0.10 sec)
+
+
+mysql> INSERT INTO PRODUCT VALUES(107,'PENCIL',2);
+    -> //
+Query OK, 1 row affected (0.53 sec)
+
+mysql> SELECT *FROM PRODUCT;
+    -> //
++-----+--------+--------+
+| pid | pname  | price  |
++-----+--------+--------+
+| 101 | PEN    | 102.00 |
+| 102 | BOOK   |  61.20 |
+| 103 | BOX    |  30.60 |
+| 104 | PENCIL |  61.20 |
+| 105 | SCALE  |  51.00 |
+| 106 | SOAP   |  12.00 |
+| 107 | PENCIL |  10.00 |
++-----+--------+--------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
