@@ -1,0 +1,75 @@
+21
+NoSQL – ADMINISTRATION
+
+
+1.Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+==================================================================================
+
+
+> db.createUser({user:"scissna",pwd:"9879",roles:[{role:"read",db:"invoice"}]})
+
+
+
+Successfully added user: {
+	"user" : "scissna",
+	"roles" : [
+		{
+			"role" : "read",
+			"db" : "invoice"
+		}
+	]
+}
+
+
+
+
+
+
+2.Write a MongoDB query to create the backup for the INVOICE database.
+==================================================================================
+
+ksb@ksb-OptiPlex-3060:~/Desktop/SCISSNA/dbms$ mkdir /home/ksb/Desktop/SCISSNA/mongoback
+sudo mongodump --db invoice --out /home/ksb/Desktop/SCISSNA/mongoback
+2022-06-14T15:26:12.219+0530	writing invoice.customer to /home/ksb/Desktop/SCISSNA/mongoback/invoice/customer.bson
+2022-06-14T15:26:12.303+0530	done dumping invoice.customer (4 documents)
+2022-06-14T15:26:12.313+0530	writing invoice.product to /home/ksb/Desktop/SCISSNA/mongoback/invoice/product.bson
+2022-06-14T15:26:12.314+0530	done dumping invoice.product (4 documents)
+
+
+
+
+
+
+
+
+
+3.Write a MongoDB query to restore a particular database or a collection.
+==================================================================================
+
+
+> use invoice
+switched to db invoice
+> 
+> db.dropDatabase()
+{ "dropped" : "invoice", "ok" : 1 }
+
+
+
+> use admin
+switched to db admin
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+
+sudo mongorestore /home/ksb/Desktop/SCISSNA/mongoback
+ksb@ksb-OptiPlex-3060:~/Desktop/SCISSNA/scissna/java/exercise10$ mongo
+
+
+> show dbs
+admin    0.000GB
+config   0.000GB
+invoice  0.000GB
+local    0.000GB
+
