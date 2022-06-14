@@ -1,0 +1,159 @@
+18 NoSQL – CRUD
+
+
+1.Write a MongoDB query to create an INVOICE database and collections (CUSTOMER,
+
+PRODUCT) and its corresponding documents.
+
+================================================================================
+> use invoice
+
+switched to db invoice
+
+
+
+> db.customer.insert({"Name":"scissna","city":"thrissur","phno":"9074567512","age":20})
+WriteResult({ "nInserted" : 1 }) 
+> 
+> db.customer.insert({"Name":"scissmo","city":"pkd","phno":"9074567522","age":21})
+WriteResult({ "nInserted" : 1 })
+> 
+> 
+> db.customer.insert({"Name":"anjali","city":"ekm","phno":"9074557522","age":20})
+WriteResult({ "nInserted" : 1 })
+> 
+> 
+> db.customer.insert({"Name":"anju","city":"ekm","phno":"907557522","age":10})
+WriteResult({ "nInserted" : 1 })
+> 
+> 
+> db.customer.insert({"Name":"midhun","city":"mlp","phno":"907557525","age":25})
+WriteResult({ "nInserted" : 1 })
+
+
+
+
+
+
+
+db.product.insertMany([{"pname":"eraser","price":"3"}, {"pname":"box","price":"35"}, {"pname":"pencil","price":"5"}, {"pname":"book","price":"15"}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("62a82168c86c3c3c26b56f60"),
+		ObjectId("62a82168c86c3c3c26b56f61"),
+		ObjectId("62a82168c86c3c3c26b56f62"),
+		ObjectId("62a82168c86c3c3c26b56f63")
+	]
+}
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+2.Write a MongoDB query to find all documents from the collection CUSTOMER
+
+================================================================================
+
+
+
+
+> db.customer.find().pretty()
+{
+	"_id" : ObjectId("62a82010c86c3c3c26b56f5b"),
+	"Name" : "scissna",
+	"city" : "thrissur",
+	"phno" : "9074567512",
+	"age" : 20
+}
+{
+	"_id" : ObjectId("62a8203fc86c3c3c26b56f5c"),
+	"Name" : "scissmo",
+	"city" : "pkd",
+	"phno" : "9074567522",
+	"age" : 21
+}
+{
+	"_id" : ObjectId("62a8205ac86c3c3c26b56f5d"),
+	"Name" : "anjali",
+	"city" : "ekm",
+	"phno" : "9074557522",
+	"age" : 20
+}
+{
+	"_id" : ObjectId("62a82072c86c3c3c26b56f5e"),
+	"Name" : "anju",
+	"city" : "ekm",
+	"phno" : "907557522",
+	"age" : 10
+}
+{
+	"_id" : ObjectId("62a8208ec86c3c3c26b56f5f"),
+	"Name" : "midhun",
+	"city" : "mlp",
+	"phno" : "907557525",
+	"age" : 25
+}
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+3.Write a MongoDB query to update the city in the collection CUSTOMER.
+
+=================================================================================
+
+> db.customer.update({city:"mlp"},{$set:{city:"eng"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> 
+> db.customer.findOne({city:"eng"})
+{
+	"_id" : ObjectId("62a8208ec86c3c3c26b56f5f"),
+	"Name" : "midhun",
+	"city" : "eng",
+	"phno" : "907557525",
+	"age" : 25
+}
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+4.Write a MongoDB query to delete the first matched document whose city is “Calicut”.
+
+=====================================================================================
+> db.customer.deleteOne({city:"ekm"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.customer.find()
+{ "_id" : ObjectId("62a82010c86c3c3c26b56f5b"), "Name" : "scissna", "city" : "thrissur", "phno" : "9074567512", "age" : 20 }
+{ "_id" : ObjectId("62a8203fc86c3c3c26b56f5c"), "Name" : "scissmo", "city" : "pkd", "phno" : "9074567522", "age" : 21 }
+{ "_id" : ObjectId("62a82072c86c3c3c26b56f5e"), "Name" : "anju", "city" : "ekm", "phno" : "907557522", "age" : 10 }
+{ "_id" : ObjectId("62a8208ec86c3c3c26b56f5f"), "Name" : "midhun", "city" : "eng", "phno" : "907557525", "age" : 25 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
